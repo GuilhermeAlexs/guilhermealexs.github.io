@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guilherme Alexs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="#" class="logo" onclick="showSection('about')">Guilherme Alexs</a>
+      <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleNav()">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="site-nav" id="site-nav">
+        <a href="#" onclick="showSection('about')" data-section="about">About</a>
+        <a href="#" onclick="showSection('maps')" data-section="maps">Maps</a>
+        <a href="#" onclick="showSection('waterfalls')" data-section="waterfalls">Waterfalls Mapping</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ABOUT -->
+  <section id="about" class="page-section active">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-text fade-in">
+          <span class="label">About me</span>
+          <h1>Hello, I'm<br /><em>Guilherme Alexs</em></h1>
+          <p class="lead">I’m a software developer with a strong passion for outdoor activities. Hands on the keyboard, feet on the trail. Here you’ll find a mix of topics, always revolving around computing and cartography. Sometimes I write tutorials, sometimes I share ideas, almost always I post maps, and occasionally I disappear for long periods without adding anything new.</p>
+          <div class="about-links">
+            <a href="https://github.com/guilhermealexs" target="_blank" class="btn-link">GitHub →</a>
+          </div>
+        </div>
+        <div class="about-visual fade-in delay-1">
+          <div class="profile-card">
+            <div class="profile-img-wrap">
+              <img src="images/me.jpeg" alt="Guilherme Alex" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'" />
+              <div class="profile-placeholder">GA</div>
+            </div>
+            <div class="profile-details">
+              <div class="detail-item">
+                <span class="detail-label">Location</span>
+                <span>Brasilia, Brazil</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Focus</span>
+                <span>Programming, GIS, Cartography</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Contact</span>
+                <a href="mailto:guilhermealexs.pereira@gmail.com" target="_blank">guilhermealexs.pereira@gmail.com</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAPS -->
+  <section id="maps" class="page-section">
+    <div class="container">
+      <div class="section-header fade-in">
+        <span class="label">Cartography</span>
+        <h2>Maps</h2>
+        <p class="section-desc">Some of the maps I made in recent years. You can view the maps online by clicking 'View map' or download them in GeoTIFF format (for navigation using smartphone apps). For now, none of these maps are suitable for printing.</p>
+      </div>
+      <div class="map-list">
+
+        <article class="map-entry fade-in">
+          <div class="map-entry-img map-entry-img--clickable" onclick="openImgViewer('geo/maps/Condóres/Condóres Circuit - 30000 - v3 (preview).jpg', 'Condóres Circuit · 1:30,000')">
+            <img src="images/condores-preview.jpg" alt="Los Condóres Circuit" onerror="this.parentElement.classList.add('no-img')" />
+          </div>
+          <div class="map-entry-body">
+            <h3>Condóres Circuit</h3>
+            <p>Trekking map of the Condóres Circuit, Región del Maule, Chile. Scale 1:30,000.</p>
+            <div class="map-entry-actions">
+              <button class="btn-text" onclick="openImgViewer('geo/maps/Condóres/Condóres Circuit - 30000 - v3 (preview).jpg', 'Condóres Circuit · 1:30,000')">View map →</button>
+              <a class="btn-text" href="geo/maps/Condóres/Condóres Circuit - 30000 - v3.tiff" download>Download GeoTiff ↓</a>
+            </div>
+          </div>
+        </article>
+
+
+        <article class="map-entry fade-in">
+          <div class="map-entry-img map-entry-img--clickable" onclick="openImgViewer('geo/maps/Huayhuash/Huayhuash 30000 - v7 (preview).jpeg', 'Huayhuash Circuit · 1:30,000')">
+            <img src="images/huayhuash-preview.jpg" alt="Huayhuash Circuit" onerror="this.parentElement.classList.add('no-img')" />
+          </div>
+          <div class="map-entry-body">
+            <h3>Huayhuash Circuit</h3>
+            <p>Trekking map of the Cordillera Huayhuash, Ancash, Peru. Scale 1:30,000.</p>
+            <div class="map-entry-actions">
+              <button class="btn-text" onclick="openImgViewer('geo/maps/Huayhuash/Huayhuash 30000 - v7 (preview).jpeg', 'Huayhuash Circuit · 1:30,000')">View map →</button>
+              <a class="btn-text" href="geo/maps/Huayhuash/Huayhuash 30000 - v7.tif" download>Download GeoTiff ↓</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="map-entry fade-in">
+          <div class="map-entry-img map-entry-img--clickable" onclick="openImgViewer('geo/maps/Pati/Vale do Pati - 30000 - v2 (preview).jpeg', 'Vale do Pati · 1:30,000')">
+            <img src="images/pati-preview.jpg" alt="Vale do Pati" onerror="this.parentElement.classList.add('no-img')" />
+          </div>
+          <div class="map-entry-body">
+            <h3>Vale do Pati</h3>
+            <p>Trekking map of most important trail in Vale do Pati, Chapada Diamantina, Brazil. Scale 1:30,000.</p>
+            <div class="map-entry-actions">
+              <button class="btn-text" onclick="openImgViewer('geo/maps/Pati/Vale do Pati - 30000 - v2 (preview).jpeg', 'Vale do Pati · 1:30,000')">View map →</button>
+              <a class="btn-text" href="geo/maps/Pati/Vale do pati - 30000 - v2.tif" download>Download GeoTiff ↓</a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- WATERFALLS MAP -->
+  <section id="waterfalls" class="page-section">
+    <div class="container">
+      <div class="section-header fade-in">
+        <span class="label">GIS</span>
+        <h2>Waterfalls Mapping</h2>
+        <p class="section-desc">Since 2015, I have been mapping waterfalls across South America, primarily in Brazil. The interactive map below provides a clustered view of this project. So far, 4,725 waterfalls have been detected through both manual and automated processes. Many of these waterfalls have names sourced from Google Maps or OpenStreetMap; consequently, some names might be inaccurate, given that these platforms are crowd-sourced and validating data precision is not always possible.</p>
+        <p class="section-desc">Some waterfalls don't have names: these are potentially unexplored features, or simply locations that haven't been documented online. Most of these unnamed waterfalls were detected using automated mechanisms—leveraging drainage networks, DEM (Digital Elevation Model) layers, and custom algorithms to ensure a baseline confidence level that a significant waterfall actually exists at that location.</p>
+        <p class="section-desc"><strong>Important notes:</strong></p>
+        <ul class="section-desc section-desc--list">
+          <li>Waterfalls with very small drops, or those located too close to another marker on the same waterway, are not always counted.</li>
+          <li>While some ephemeral waterfalls (existing only during heavy rainfall) might still appear, we made a some effort to filter them out.</li>
+        </ul>
+      </div>
+      <div class="map-wrapper fade-in delay-1">
+        <div id="leaflet-map"></div>
+        <div id="map-info" class="map-info-panel">
+          <p class="map-info-note">ℹ️ Click a marker to see details.</p>
+        </div>
+      </div>
+      <div class="map-download">
+        <a class="btn-link" href="geo/waterfalls/waterfalls_22092023.gpkg" download>Download full dataset (.gpkg) ↓</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <span>© 2025 Guilherme Alexs</span>
+      <span><a href="https://github.com/guilhermealexs" target="_blank">github.com/guilhermealexs</a></span>
+    </div>
+  </footer>
+
+  <!-- Image Viewer Modal -->
+  <div id="img-viewer-modal" class="img-viewer-modal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="img-viewer-bar">
+      <span id="img-viewer-title" class="img-viewer-title"></span>
+      <button class="img-viewer-close" onclick="closeImgViewer()" aria-label="Close">✕</button>
+    </div>
+    <div id="img-viewer-stage" class="img-viewer-stage">
+      <img id="img-viewer-img" src="" alt="Map" draggable="false" />
+    </div>
+    <div class="img-viewer-hint">Drag to pan · 50% zoom</div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sql.js@1.10.2/dist/sql-wasm.js"></script>
+  <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

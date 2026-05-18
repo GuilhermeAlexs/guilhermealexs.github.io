@@ -1,0 +1,19 @@
+# Claude
+CLAUDE.md
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Dev server
+*.log
+
+# Python (local dev server)
+__pycache__/
+*.pyc
