@@ -2,7 +2,14 @@
    Navigation
    ========================================= */
 
+const VALID_SECTIONS = ['about', 'maps', 'waterfalls'];
+
 function showSection(id) {
+  if (!VALID_SECTIONS.includes(id)) id = 'about';
+
+  // Update hash without triggering hashchange
+  history.replaceState(null, '', '#' + id);
+
   // Hide all sections
   document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
 
@@ -10,10 +17,9 @@ function showSection(id) {
   const target = document.getElementById(id);
   if (target) {
     target.classList.add('active');
-    // Re-trigger fade-in animations
     target.querySelectorAll('.fade-in').forEach(el => {
       el.style.animation = 'none';
-      el.offsetHeight; // reflow
+      el.offsetHeight;
       el.style.animation = '';
     });
   }
@@ -37,11 +43,9 @@ function toggleNav() {
   document.getElementById('site-nav').classList.toggle('open');
 }
 
-// Set initial active nav link
 document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('.site-nav a').forEach(a => {
-    if (a.dataset.section === 'about') a.classList.add('active');
-  });
+  const hash = location.hash.replace('#', '');
+  showSection(VALID_SECTIONS.includes(hash) ? hash : 'about');
 });
 
 /* =========================================
