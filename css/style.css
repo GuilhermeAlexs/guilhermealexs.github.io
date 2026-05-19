@@ -383,6 +383,82 @@ h3 {
   color: var(--accent);
 }
 
+.map-legend {
+  margin-top: 28px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  padding: 20px 24px;
+  box-shadow: var(--shadow);
+}
+
+.map-legend-title {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+}
+
+.map-legend-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.map-legend-row {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 12px;
+  align-items: baseline;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+}
+.map-legend-row:last-child { border-bottom: none; }
+
+.map-legend-row dt {
+  font-size: 0.85rem;
+}
+.map-legend-row dt code {
+  background: var(--accent-lt);
+  color: var(--accent);
+  padding: 2px 7px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+}
+
+.map-legend-row dd {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+.map-legend-type-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.map-legend-type-list li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.type-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+  flex-shrink: 0;
+}
+.type-dot--1 { background: #6aaed8; }
+.type-dot--2 { background: #6aaed8; opacity: 0.5; }
+.type-dot--3 { background: #6aaed8; opacity: 0.5; }
+
 /* =========================================
    Image Viewer Modal
    ========================================= */
@@ -467,12 +543,12 @@ h3 {
 .marker-cluster-small,
 .marker-cluster-medium,
 .marker-cluster-large {
-  background-color: rgba(74, 124, 89, 0.18);
+  background-color: rgba(106, 174, 216, 0.25);
 }
 .marker-cluster-small div,
 .marker-cluster-medium div,
 .marker-cluster-large div {
-  background-color: rgba(74, 124, 89, 0.6);
+  background-color: rgba(106, 174, 216, 0.75);
   color: #fff;
   font-family: var(--font-sans);
   font-size: 0.78rem;

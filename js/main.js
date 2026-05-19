@@ -161,15 +161,20 @@ function initMap() {
   const infoPanel = document.getElementById('map-info');
   infoPanel.innerHTML = '<span style="color:var(--text-muted)">⏳ Loading data…</span>';
 
-  const markerIcon = L.divIcon({
-    className: '',
-    html: '<div style="background:#4a7c59;border-radius:50%;width:9px;height:9px;border:1.5px solid rgba(255,255,255,0.85);box-shadow:0 1px 3px rgba(0,0,0,.35)"></div>',
-    iconSize: [9, 9],
-    iconAnchor: [4, 4],
-    popupAnchor: [0, -6]
-  });
+  const TYPE_OPACITY = { 1: 1, 2: 0.5, 3: 0.5 };
 
-  const clusterGroup = L.markerClusterGroup({ chunkedLoading: true });
+  function makeMarkerIcon(type) {
+    const opacity = TYPE_OPACITY[type] ?? TYPE_OPACITY[1];
+    return L.divIcon({
+      className: '',
+      html: `<div style="background:#6aaed8;border-radius:50%;width:13px;height:13px;border:2px solid rgba(255,255,255,0.9);box-shadow:0 1px 4px rgba(0,0,0,.4);opacity:${opacity}"></div>`,
+      iconSize: [13, 13],
+      iconAnchor: [6, 6],
+      popupAnchor: [0, -6]
+    });
+  }
+
+  const clusterGroup = L.markerClusterGroup({ chunkedLoading: true, maxClusterRadius: 65, minimumClusterSize: 10, disableClusteringAtZoom: 10 });
   map.addLayer(clusterGroup);
 
   // Parse a GeoPackage point geometry blob (OGC GPKG binary + WKB).
@@ -189,12 +194,13 @@ function initMap() {
   initSqlJs({ locateFile: f => `https://cdn.jsdelivr.net/npm/sql.js@1.10.2/dist/${f}` })
     .then(SQL => fetch('geo/waterfalls/waterfalls_22092023.gpkg').then(r => r.arrayBuffer()).then(buf => new SQL.Database(new Uint8Array(buf))))
     .then(db => {
-      const [{ columns, values }] = db.exec('SELECT fid, name, geom FROM "waterfalls"');
+      const [{ columns, values }] = db.exec('SELECT fid, name, type, geom FROM "waterfalls"');
       db.close();
 
-      const geomIdx = columns.indexOf('geom');
-      const nameIdx = columns.indexOf('name');
-      const fidIdx  = columns.indexOf('fid');
+      const geomIdx  = columns.indexOf('geom');
+      const nameIdx  = columns.indexOf('name');
+      const fidIdx   = columns.indexOf('fid');
+      const typeIdx  = columns.indexOf('type');
 
       const markers = [];
       for (const row of values) {
@@ -204,7 +210,8 @@ function initMap() {
         if (!isFinite(lat) || !isFinite(lon)) continue;
 
         const name = row[nameIdx] || (row[fidIdx] ? `#${row[fidIdx]}` : 'Attraction');
-        const marker = L.marker([lat, lon], { icon: markerIcon });
+        const type = row[typeIdx];
+        const marker = L.marker([lat, lon], { icon: makeMarkerIcon(type) });
         marker.bindPopup(
           `<strong style="font-family:var(--font-serif);font-size:0.95rem">${name}</strong>`,
           { maxWidth: 240 }
